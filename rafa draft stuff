@@ -1,0 +1,54 @@
+import java.util.Scanner;
+import java.io.*;
+
+class Student {
+    String name;
+    int courses;
+    int[] grades = new int[];
+
+
+    Student(String n) {
+        name = n;
+    }
+
+    void printInfo() {
+        System.out.println("name: " + name);
+        int i;
+        for (i = 0; i < 1; i++)
+
+            System.out.println("Assignment score: " + grades [0]);
+        System.out.println("Midterm score: " + grades [1]);
+        System.out.println("Final Score: " + grades [2]);
+
+    }
+
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // File f = new File("students.txt");
+        // FileWriter writer = new FileWriter();
+
+        // Grab Student Classes amount
+        System.out.println("How many classes?");
+        int classesHolder = sc.nextLine();
+
+        Student s = new Student(nameHolder);
+
+        for (int j = 1; j == 1; j++) {
+            System.out.println("Enter assignment score: ");
+            s.grades[0] = sc.nextInt();
+            sc.nextLine();
+            System.out.println("Enter midterm score: ");
+            s.grades[1] = sc.nextInt();
+            sc.nextLine();
+            System.out.println("Enter final score: ");
+            s.grades[2] = sc.nextInt();
+            sc.nextLine();
+            int average = (s.grades[0] + s.grades[1] + s.grades[2]) / 3;
+            s.printInfo();
+
+        }
+    }
+}
