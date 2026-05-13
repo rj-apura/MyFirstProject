@@ -1,209 +1,66 @@
 import java.util.Scanner;
-import java.io.*;
-import java.util.ArrayList;
-
 class Student {
     String name;
     int[] grades = new int[3];
 
+
     Student(String n) {
         name = n;
-    }
 
-    // Calculate average grade
-    double getAverage() {
-        int sum = 0;
-        for (int grade : grades) {
-            sum += grade;
-        }
-        return (double) sum / grades.length;
-    }
-
-    // Find highest grade
-    int getHighest() {
-        int highest = grades[0];
-        for (int grade : grades) {
-            if (grade > highest)
-                highest = grade;
-        }
-        return highest;
-    }
-
-    // Find lowest grade
-    int getLowest() {
-        int lowest = grades[0];
-        for (int grade : grades) {
-            if (grade < lowest)
-                lowest = grade;
-        }
-        return lowest;
-    }
-
-    // Convert average to letter grade
-    char getLetterGrade() {
-        double avg = getAverage();
-        if (avg >= 90) return 'A';
-        if (avg >= 80) return 'B';
-        if (avg >= 70) return 'C';
-        if (avg >= 60) return 'D';
-        return 'F';
     }
 
     void printInfo() {
-        System.out.println("\n--- Student Information ---");
-        System.out.println("Name: " + name);
-        for (int i = 0; i < 3; i++)
-            System.out.println("Grade " + (i + 1) + ": " + grades[i]);
-        System.out.println("Average: " + String.format("%.2f", getAverage()));
-        System.out.println("Highest: " + getHighest());
-        System.out.println("Lowest: " + getLowest());
-        System.out.println("Letter Grade: " + getLetterGrade());
-        System.out.println("------------------------\n");
+        System.out.println("name: " + name);
+        int i;
+        for (i = 0; i < 1; i++)
+
+            System.out.println("Assignment score: " + grades [0]);
+        System.out.println("Midterm score: " + grades [1]);
+        System.out.println("Final Score: " + grades [2]);
+
+
     }
 
-    // Convert student data to string format for file storage
-    @Override
-    public String toString() {
-        return name + "," + grades[0] + "," + grades[1] + "," + grades[2];
-    }
-
-    // Create student from string format
-    static Student fromString(String data) {
-        String[] parts = data.split(",");
-        Student s = new Student(parts[0]);
-        s.grades[0] = Integer.parseInt(parts[1]);
-        s.grades[1] = Integer.parseInt(parts[2]);
-        s.grades[2] = Integer.parseInt(parts[3]);
-        return s;
-    }
-}
-
-public class Main {
-    private static final String FILE_NAME = "students.txt";
-    private static ArrayList<Student> students = new ArrayList<>();
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int choice;
-
-        // Load existing data from file
-        loadStudents();
-
-        do {
-            displayMenu();
-            choice = sc.nextInt();
-            sc.nextLine(); // Consume newline
-
-            switch (choice) {
-                case 1:
-                    addNewStudent(sc);
-                    break;
-                case 2:
-                    displayAllStudents();
-                    break;
-                case 3:
-                    searchStudent(sc);
-                    break;
-                case 4:
-                    saveStudents();
-                    System.out.println("Data saved successfully!");
-                    break;
-                case 5:
-                    System.out.println("Exiting and saving data...");
-                    saveStudents();
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-            }
-        } while (choice != 5);
-
-        sc.close();
-    }
-
-    static void displayMenu() {
-        System.out.println("\n=== Student Management System ===");
-        System.out.println("1. Add new student");
-        System.out.println("2. Display all students");
-        System.out.println("3. Search student by name");
-        System.out.println("4. Save data");
-        System.out.println("5. Exit");
-        System.out.print("Enter your choice: ");
-    }
-
-    static void addNewStudent(Scanner sc) {
-        System.out.print("Enter student name: ");
-        String name = sc.nextLine();
-
-        Student student = new Student(name);
-
-        for (int i = 0; i < 3; i++) {
-            System.out.print("Enter grade " + (i + 1) + ": ");
-            student.grades[i] = sc.nextInt();
-            sc.nextLine(); // Consume newline
         }
 
-        students.add(student);
-        student.printInfo();
-        System.out.println("Student added successfully!");
-    }
 
-    static void displayAllStudents() {
-        if (students.isEmpty()) {
-            System.out.println("\nNo students found!");
-            return;
-        }
+        public class Main {
+            public static void main(String[] args) {
+                Scanner sc = new Scanner(System.in);
 
-        System.out.println("\n=== All Students ===");
-        for (Student student : students) {
-            student.printInfo();
-        }
-    }
+                System.out.println("how many students: ");
+                int num = sc.nextInt();
+                sc.nextLine();
 
-    static void searchStudent(Scanner sc) {
-        System.out.print("Enter student name to search: ");
-        String searchName = sc.nextLine();
 
-        boolean found = false;
-        for (Student student : students) {
-            if (student.name.equalsIgnoreCase(searchName)) {
-                student.printInfo();
-                found = true;
-                break;
+                for (int i = 1; i <= num; i++) {
+                    System.out.println("enter name for student " + i + ": ");
+                    String temp = sc.nextLine();
+
+                    Student s = new Student(temp);
+
+                    for (int j = 1; j == 1; j++) {
+                        System.out.println("Enter assignment score: ");
+                        s.grades[0] = sc.nextInt();
+                        sc.nextLine();
+                        System.out.println("Enter midterm score: ");
+                        s.grades[1] = sc.nextInt();
+                        sc.nextLine();
+                        System.out.println("Enter final score: ");
+                        s.grades[2] = sc.nextInt();
+                        sc.nextLine();
+                        int average = (s.grades[0] + s.grades[1] + s.grades[2]) / 3;
+                        s.printInfo();
+
+                        if (average >= 60)
+                            System.out.println( temp + " passed!");
+                        else
+                            System.out.println( temp + " failed!");
+
+
+
+                    }
+                }
+
             }
         }
-
-        if (!found) {
-            System.out.println("Student not found!");
-        }
-    }
-
-    // Save students to file
-    static void saveStudents() {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_NAME))) {
-            for (Student student : students) {
-                writer.println(student.toString());
-            }
-        } catch (IOException e) {
-            System.out.println("Error saving to file: " + e.getMessage());
-        }
-    }
-
-    // Load students from file
-    static void loadStudents() {
-        File file = new File(FILE_NAME);
-        if (!file.exists()) {
-            System.out.println("No previous data found. Starting fresh.");
-            return;
-        }
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                students.add(Student.fromString(line));
-            }
-            System.out.println("Loaded " + students.size() + " student(s) from file.");
-        } catch (IOException e) {
-            System.out.println("Error loading from file: " + e.getMessage());
-        }
-    }
-}
