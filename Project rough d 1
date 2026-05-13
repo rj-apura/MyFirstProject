@@ -1,12 +1,15 @@
 import java.util.Scanner;
+import java.io.*;
+
 class Student {
     String name;
-    int[] grades = new int[3];
+    int courses;
+    int[] grades = new int[courses];
 
 
-    Student(String n) {
+    Student(String n,int c) {
         name = n;
-
+        courses = c;
     }
 
     void printInfo() {
@@ -18,49 +21,37 @@ class Student {
         System.out.println("Midterm score: " + grades [1]);
         System.out.println("Final Score: " + grades [2]);
 
-
     }
+}
+
+public class Main {
+    public static void main(String[] args) throws IOException{
+        Scanner sc = new Scanner(System.in);
+        File f = new File("students.txt");
+        f.createNewFile();
+        FileWriter writer = new FileWriter();
+
+        // Grab Student Classes amount
+        System.out.println("How many classes?");
+        int classesHolder = sc.nextInt();
+
+        Student s = new Student();
+
+
+        //MATTHEW CHANGE THIS SHIT TO ASK "ENTER GRADE FOR COURSE x"
+        for (int j = 1; j == 1; j++) {
+            System.out.println("Enter assignment score: ");
+            s.grades[0] = sc.nextInt();
+            sc.nextLine();
+            System.out.println("Enter midterm score: ");
+            s.grades[1] = sc.nextInt();
+            sc.nextLine();
+            System.out.println("Enter final score: ");
+            s.grades[2] = sc.nextInt();
+            sc.nextLine();
+            int average = (s.grades[0] + s.grades[1] + s.grades[2]) / 3;
+            s.printInfo();
 
         }
-
-
-        public class Main {
-            public static void main(String[] args) {
-                Scanner sc = new Scanner(System.in);
-
-                System.out.println("how many students: ");
-                int num = sc.nextInt();
-                sc.nextLine();
-
-
-                for (int i = 1; i <= num; i++) {
-                    System.out.println("enter name for student " + i + ": ");
-                    String temp = sc.nextLine();
-
-                    Student s = new Student(temp);
-
-                    for (int j = 1; j == 1; j++) {
-                        System.out.println("Enter assignment score: ");
-                        s.grades[0] = sc.nextInt();
-                        sc.nextLine();
-                        System.out.println("Enter midterm score: ");
-                        s.grades[1] = sc.nextInt();
-                        sc.nextLine();
-                        System.out.println("Enter final score: ");
-                        s.grades[2] = sc.nextInt();
-                        sc.nextLine();
-                        int average = (s.grades[0] + s.grades[1] + s.grades[2]) / 3;
-                        s.printInfo();
-
-                        if (average >= 60)
-                            System.out.println( temp + " passed!");
-                        else
-                            System.out.println( temp + " failed!");
-
-
-
-                    }
-                }
-
-            }
-        }
+    }
+}
