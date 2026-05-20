@@ -13,6 +13,19 @@ class Student {
         grades = new double[assignments];
     }
 
+    // TODO: Make method
+    double getAverage(){
+
+    }
+
+    double getLowest(){
+
+    }
+
+    double getHighest(){
+
+    }
+
     void printInfo() {
         System.out.println("---" + name + "---");
         System.out.println("Grades");
@@ -27,6 +40,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
             Scanner sc = new Scanner(System.in);
 
+            // TODO: Check for File "students.txt"
+            try {
+                File dataFile = new File("students.txt");
+                Scanner input = new Scanner(dataFile);
+            } catch(Exception e){
+                System.out.println();
+            }
+
             // Grab Student Classes amount
             System.out.print("How many assignments? ");
             int assignmentsHolder = sc.nextInt();
@@ -40,21 +61,21 @@ public class Main {
             double sum = 0.0;
 
             for (int i = 0; i < assignmentsHolder; i++) {
-                System.out.println("Enter score for assignment "+(i+1)+": ");
+                System.out.print("Enter score for assignment "+(i+1)+": ");
                 s.grades[i] = sc.nextDouble();
                 sum+= s.grades[i];
             }
 
             s.printInfo();
-            System.out.println(sum/s.grades.length);
+            System.out.println("Grade Average: " + (sum/s.grades.length));
             // try catch
-            //File studentData = new File("students.txt");
+            // File studentData = new File("students.txt");
 
-            //FileWriter writer = new FileWriter("students.txt");
-            //writer.write("\n" + s.name + "\n");
-            //writer.write("Courses: " + s.assignments + "\n");
-            //writer.write("Grades: ");
-            //for (int i = 0; i == s.assignments; i++) {
+            // FileWriter writer = new FileWriter("students.txt");
+            // writer.write("\n" + s.name + "\n");
+            // writer.write("Courses: " + s.assignments + "\n");
+            // writer.write("Grades: ");
+            // for (int i = 0; i == s.assignments; i++) {
             //    writer.write(" "+s.grades[i]+" ");
             //}
     }
