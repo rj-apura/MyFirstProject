@@ -3,55 +3,59 @@ import java.io.*;
 
 class Student {
     String name;
-    int courses;
-    int[] grades = new int[courses];
+    int assignments;
+    double[] grades; // = new int[courses];
 
 
-    Student(String n,int c) {
+    Student(String n, int a) {
         name = n;
-        courses = c;
+        assignments = a;
+        grades = new double[assignments];
     }
 
     void printInfo() {
-        System.out.println("name: " + name);
-        int i;
-        for (i = 0; i < 1; i++)
-
-            System.out.println("Assignment score: " + grades [0]);
-        System.out.println("Midterm score: " + grades [1]);
-        System.out.println("Final Score: " + grades [2]);
-
+        System.out.println("---" + name + "---");
+        System.out.println("Grades");
+        System.out.println("----------------");
+        for (int i = 0; i < assignments; i++) {
+            System.out.println(grades[i]);
+        }
     }
 }
 
 public class Main {
-    public static void main(String[] args) throws IOException{
-        Scanner sc = new Scanner(System.in);
-        File f = new File("students.txt");
-        f.createNewFile();
-        FileWriter writer = new FileWriter();
+    public static void main(String[] args) throws IOException {
+            Scanner sc = new Scanner(System.in);
 
-        // Grab Student Classes amount
-        System.out.println("How many classes?");
-        int classesHolder = sc.nextInt();
-
-        Student s = new Student();
-
-
-        //MATTHEW CHANGE THIS SHIT TO ASK "ENTER GRADE FOR COURSE x"
-        for (int j = 1; j == 1; j++) {
-            System.out.println("Enter assignment score: ");
-            s.grades[0] = sc.nextInt();
+            // Grab Student Classes amount
+            System.out.print("How many assignments? ");
+            int assignmentsHolder = sc.nextInt();
             sc.nextLine();
-            System.out.println("Enter midterm score: ");
-            s.grades[1] = sc.nextInt();
-            sc.nextLine();
-            System.out.println("Enter final score: ");
-            s.grades[2] = sc.nextInt();
-            sc.nextLine();
-            int average = (s.grades[0] + s.grades[1] + s.grades[2]) / 3;
+
+            System.out.print("What is your name? ");
+            String nameHolder = sc.nextLine();
+
+            Student s = new Student(nameHolder, assignmentsHolder);
+
+            double sum = 0.0;
+
+            for (int i = 0; i < assignmentsHolder; i++) {
+                System.out.println("Enter score for assignment "+(i+1)+": ");
+                s.grades[i] = sc.nextDouble();
+                sum+= s.grades[i];
+            }
+
             s.printInfo();
+            System.out.println(sum/s.grades.length);
+            // try catch
+            //File studentData = new File("students.txt");
 
-        }
+            //FileWriter writer = new FileWriter("students.txt");
+            //writer.write("\n" + s.name + "\n");
+            //writer.write("Courses: " + s.assignments + "\n");
+            //writer.write("Grades: ");
+            //for (int i = 0; i == s.assignments; i++) {
+            //    writer.write(" "+s.grades[i]+" ");
+            //}
     }
 }
